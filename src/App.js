@@ -37,16 +37,16 @@ const App = ({
 
   useEffect(() => {
     setProducts(listProducts);
-  }, [listProducts])
-    console.log(listProducts);
+  }, [listProducts, setProducts]);
+  console.log(listProducts);
   return (
-    <ThemeProvider theme={theme}>a
+    <ThemeProvider theme={theme}>
       <Router history={history}>
         <Loader />
-          <GlobalLayout>
-              <Switch>
-                <>
-                  {/* <Route
+        <GlobalLayout>
+          <Switch>
+            <>
+              {/* <Route
                     path={`${routes.videoSettings.path}/:platform/:videoId`}
                     exact
                     render={({
@@ -55,14 +55,14 @@ const App = ({
                       }
                     }) => <VideoSettings videoId={videoId} platform={platform} />}
                   /> */}
-                  <Route
-                    path={routes.home.path}
-                    render={() => <Home />}
-                  />
-                  <Redirect to={routes.home.path} />
-                </>
-              </Switch>
-          </GlobalLayout>
+              <Route
+                path={routes.home.path}
+                render={() => <Home />}
+              />
+              <Redirect to={routes.home.path} />
+            </>
+          </Switch>
+        </GlobalLayout>
       </Router>
       <Toast />
       <ModalsPortal.Target />
@@ -73,18 +73,13 @@ const App = ({
 
 App.propTypes = {
   // HOC (connect, state)
-  isLogged: PropTypes.bool.isRequired,
-  getPublishers: PropTypes.func
 };
 
 export default connect(
-  state => {
+  state => ({
 
-    return {
-
-    };
-  },
+  }),
   dispatch => ({
-    setProducts: (products) => dispatch({ type: SET_PRODUCTS, products }),
+    setProducts: (products) => dispatch({ type: SET_PRODUCTS, products })
   })
 )(App);

@@ -20,7 +20,7 @@ const FiltersSection = ({
         <Inter type="bold">Genres</Inter>
         <Genres>
           {genresList.map((genre) => (
-            <Genre nameGenre={genre.name}/>
+            <Genre nameGenre={genre.name} />
           ))}
         </Genres>
       </Section>

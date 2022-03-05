@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import compose from '../../redux/compose';
 import { connect } from 'react-redux';
+import compose from '../../redux/compose';
 import { withMediaQueries } from '../../hoc/withMediaQueries';
 import { HeaderContainer, LeftContainer, RightContainer } from './style';
-import { FiltersButton, HamburgerMenu, MenuMobile, ProductType, Search } from '../index';
+import {
+  FiltersButton, HamburgerMenu, MenuMobile, ProductType, Search
+} from '../index';
 import Logo from '../Logo';
 
-const Header = ({mediaIsPhone, isVisible}) => {
+const Header = ({ mediaIsPhone, isVisible }) => {
   const [menuMobileIsOpen, setMenuMobileIsOpen] = useState(false);
   return (
     <>
@@ -15,7 +17,7 @@ const Header = ({mediaIsPhone, isVisible}) => {
           <Search isHeader />
         )}
         <LeftContainer>
-          <Logo size='small' />
+          <Logo size="small" />
           {!mediaIsPhone && (
             <ProductType />
           )}
