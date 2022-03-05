@@ -1,0 +1,56 @@
+@import "structure/base";
+@import "structure/reset";
+@import "structure/fonts";
+@import "structure/icon-style";
+//@import "structure/common";
+
+$font-base-url: '../assets/fonts/';
+
+/* Normal */
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-style: normal;
+  src: url($font-base-url + 'Roboto-Regular.ttf');
+}
+
+/* Normal Italic */
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-style: italic;
+  src: url($font-base-url + 'Roboto-Italic.ttf');
+}
+
+
+/* Light */
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 300;
+  font-style: normal;
+  src: url($font-base-url + 'Roboto-Light.ttf');
+}
+
+/* Medium */
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-style: normal;
+  src: url($font-base-url + 'Roboto-Medium.ttf');
+}
+
+/* Bold */
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-style: normal;
+  src: url($font-base-url + 'Roboto-Bold.ttf');
+}
+
+body {
+  background-color: #1F1D2C;
+  color: #ECECEC;
+  overflow-x: hidden;
+  font-family: "Inter", sans-serif;
+  min-height: 3000px; // TODO: delete
+}

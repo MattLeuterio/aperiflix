@@ -1,0 +1,21 @@
+{
+  "code": 200,
+  "status": "ok",
+  "timestamp": 1625211880426,
+  "data": {
+  "result": [
+      {
+        "name": "ilmattino.creator",
+        "role": "creator"
+      },
+      {
+        "name": "ilpomeriggio.editor",
+        "role": "editor"
+      },
+      {
+        "name": "lasera.creator",
+        "role": "creator"
+      }
+    ]
+  }
+}

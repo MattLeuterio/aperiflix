@@ -1,0 +1,17 @@
+{
+  "code": 200,
+  "status": "ok",
+  "timestamp": 1625211880426,
+  "data": {
+  "result": [
+      {
+        "name": "focus",
+        "role": "creator"
+      },
+      {
+        "name": "lanazione",
+        "role": "editor"
+      }
+    ]
+  }
+}

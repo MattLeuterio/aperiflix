@@ -1,0 +1,40 @@
+{
+  "code": 200,
+  "result": "ok",
+  "data": [
+    {
+      "username": "SUPER_ADMIN",
+      "name": "ACN",
+      "surname": "SUPER_ADMIN",
+      "mail": "admin@example.com",
+      "type": "super_admin",
+      "defaultLanguage": "it"
+    },
+    {
+        "username": "ronaldinho",
+        "name": "ronaldinho",
+        "surname": "cattaneo",
+        "mail": "ronaldinho.cattaneo@example.com",
+        "type": "member",
+        "publishers_count": 0,
+        "defaultLanguage": "it"
+    },
+    {
+        "username": "matteo.leuterio",
+        "name": "matteo",
+        "surname": "leuterio",
+        "mail": "matteo.leuterio@example.com",
+        "type": "member",
+        "publishers_count": 3,
+        "defaultLanguage": "en"
+    },
+    {
+        "username": "giuseppe",
+        "name": "giuseppe",
+        "surname": "caliendo",
+        "mail": "giuseppe.caliendo@example.com",
+        "type": "admin",
+        "defaultLanguage": "en"
+    }
+  ]
+}

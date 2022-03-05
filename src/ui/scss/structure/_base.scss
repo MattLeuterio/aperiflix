@@ -1,0 +1,46 @@
+.container-fluid {
+  margin: 0 auto;
+
+  &.content-wrapper {
+    padding: 0;
+  }
+}
+
+// DATE CALENDAR CURSOR POINTER
+.react-datepicker__input-container {
+  input {
+    cursor: pointer;
+  }
+}
+
+
+//Youtube preview
+.player_preview {
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+  color: transparent;
+}
+
+.posRelative {
+  position: relative;
+}
+
+
+.react-datepicker-popper {
+  z-index: 2;
+}
+
+.react-datepicker-popper[data-placement^="bottom"] {
+  position: absolute!important;
+  will-change: transform!important;
+  min-width: 329px!important;
+  top: 0px!important;
+  left: 0px!important;
+  transform: translate3d(4px, 33px, 0px)!important;
+}
