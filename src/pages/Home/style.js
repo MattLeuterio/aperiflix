@@ -51,7 +51,7 @@ export const FiltersRow = styled.div`
 export const ResultsContainer = styled.div`
   display: flex;   
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 0 20px;
 
   @media (max-width: 743px) {

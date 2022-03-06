@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
-  CardProductContainer, CoverSection, InfoSection, RatingWrapper
+  CardProductContainer, CoverSection, InfoSection, RatingWrapper, TypeWrapper
 } from './style';
 import { RatingBottle } from '../index';
 import Inter from '../../ui/typography/inter';
@@ -13,9 +13,12 @@ const CardProduct = ({
   <CardProductContainer>
     <CoverSection cover={product.cover}>
       <RatingWrapper>
-        <RatingBottle vote={product.mVote} voter="m" />
-        <RatingBottle vote={product.iVote} voter="i" />
+        {product.mVote && <RatingBottle vote={product.mVote} voter="m" />}
+        {product.iVote && <RatingBottle vote={product.iVote} voter="i" />}
       </RatingWrapper>
+      <TypeWrapper>
+        <Inter type="cardProductType">{product.productType}</Inter>
+      </TypeWrapper>
     </CoverSection>
     <InfoSection>
       <Inter type="cardGenre">{product.genre}</Inter>

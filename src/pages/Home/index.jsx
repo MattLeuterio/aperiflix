@@ -2,14 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import {
-  CardProductContainer, CoverSection,
   FiltersRow,
   FiltersWrapper,
-  HomeContainer, InfoRow, InfoSection, RatingWrapper, ResultsContainer, TotalWrappers
+  HomeContainer,
+  InfoRow,
+  ResultsContainer,
+  TotalWrappers
 } from './style';
 import { withMediaQueries } from '../../hoc/withMediaQueries';
 import Inter from '../../ui/typography/inter';
-import { CardProduct, FilterPill, RatingBottle } from '../../atoms';
+import { CardProduct, FilterPill } from '../../atoms';
 import { SET_FILTER_BY_TITLE, SET_GENRE, SET_ORDER } from '../../redux/actions/filters';
 
 const initialListFiltersSelected = [
@@ -92,6 +94,8 @@ const Home = ({
   useEffect(() => {
     setCountFilters(listFiltersSelected.filter(el => el.value).length);
   }, [listFiltersSelected]);
+
+  console.log('listFiltersSelected', listFiltersSelected);
 
   return (
     <HomeContainer>

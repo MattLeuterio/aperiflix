@@ -59,6 +59,10 @@ const types = {
     fontSize: 22,
     fontWeight: 600
   },
+  cardProductType: {
+    fontSize: 14,
+    fontWeight: 600
+  },
   headerUser: {
     color: theme.colors.custom.blue,
     fontWeight: 500

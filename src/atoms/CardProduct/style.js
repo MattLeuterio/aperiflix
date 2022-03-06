@@ -50,6 +50,17 @@ export const RatingWrapper = styled.div`
   justify-content: space-around;
 `;
 
+export const TypeWrapper = styled.div`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  justify-content: space-around;
+  border-radius: 300px;
+  padding: 3px 6px;
+  background-color: ${props => props.theme.colors.primary.red};
+`;
+
 export const InfoSection = styled.div`
   width: 100%;
   height: 180px;
