@@ -50,6 +50,15 @@ const types = {
     color: theme.colors.primary.red,
     fontSize: 12
   },
+  cardGenre: {
+    fontSize: 14,
+    fontWeight: 300,
+    fontStyle: 'italic'
+  },
+  cardTitle: {
+    fontSize: 22,
+    fontWeight: 600
+  },
   headerUser: {
     color: theme.colors.custom.blue,
     fontWeight: 500

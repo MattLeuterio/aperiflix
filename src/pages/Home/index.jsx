@@ -2,87 +2,97 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import {
+  CardProductContainer, CoverSection,
   FiltersRow,
   FiltersWrapper,
-  HomeContainer, InfoRow, ResultsContainer, TotalWrappers
+  HomeContainer, InfoRow, InfoSection, RatingWrapper, ResultsContainer, TotalWrappers
 } from './style';
 import { withMediaQueries } from '../../hoc/withMediaQueries';
 import Inter from '../../ui/typography/inter';
-import { FilterPill, RatingBottle } from '../../atoms';
+import { CardProduct, FilterPill, RatingBottle } from '../../atoms';
 import { SET_FILTER_BY_TITLE, SET_GENRE, SET_ORDER } from '../../redux/actions/filters';
 
 const initialListFiltersSelected = [
   {
-    "name": "Query",
-    "value": false,
+    name: 'Query',
+    value: false
   },
   {
-    "name": "Genre",
-    "value": false,
+    name: 'Genre',
+    value: false
   },
   {
-    "name": "Order",
-    "value": false,
+    name: 'Order',
+    value: false
   }
-]
+];
 
 const Home = ({
- filterByTitle, genreSelected, orderSelected, setFilterByTitle, setGenre, setOrder
+  filterByTitle, genreSelected, orderSelected,
+  setFilterByTitle, setGenre, setOrder, productsList
 }) => {
+  const [listProducts, setListProducts] = useState([]);
   const [countFilters, setCountFilters] = useState(0);
-  const [totalProducts, setProductsTotal] = useState(0);
+  const [totalProducts, setTotalProducts] = useState(0);
   const [listFiltersSelected, setListFiltersSelected] = useState(initialListFiltersSelected);
-
-  console.log('listFiltersSelected', listFiltersSelected);
 
   const switchFilterValue = (name) => {
     let sel = null;
     switch (name) {
-    case "Query":
-      sel = filterByTitle;
-      break;
-    case "Genre":
-      sel = genreSelected;
-      break;
-    case "Order":
-      sel = orderSelected;
-      break;
+      case 'Query':
+        sel = filterByTitle;
+        break;
+      case 'Genre':
+        sel = genreSelected;
+        break;
+      case 'Order':
+        sel = orderSelected;
+        break;
 
-    default:
-      sel = null;
+      default:
+        sel = null;
     }
 
     return sel;
-  }
+  };
 
   const switchFilterAction = (name) => {
     switch (name) {
-      case "Query":
+      case 'Query':
         setFilterByTitle('');
         break;
-      case "Genre":
+      case 'Genre':
         setGenre('');
         break;
-      case "Order":
+      case 'Order':
         setOrder('');
         break;
 
       default:
         setFilterByTitle('');
     }
-  }
+  };
+
+  useEffect(() => {
+    setListProducts(productsList);
+  }, [productsList]);
+
+  useEffect(() => {
+    setTotalProducts(listProducts.length);
+  }, [listProducts]);
 
   useEffect(() => {
     setListFiltersSelected([
-      { "name": "Query", "value": Boolean(filterByTitle)},
-      { "name": "Genre", "value": Boolean(genreSelected)},
-      { "name": "Order", "value": Boolean(orderSelected)},
+      { name: 'Query', value: Boolean(filterByTitle) },
+      { name: 'Genre', value: Boolean(genreSelected) },
+      { name: 'Order', value: Boolean(orderSelected) }
     ]);
-  }, [filterByTitle, genreSelected, orderSelected])
+  }, [filterByTitle, genreSelected, orderSelected]);
 
   useEffect(() => {
     setCountFilters(listFiltersSelected.filter(el => el.value).length);
-  }, [listFiltersSelected])
+  }, [listFiltersSelected]);
+
   return (
     <HomeContainer>
       <InfoRow>
@@ -90,49 +100,50 @@ const Home = ({
           <Inter
             htmlAttribute="span"
             type="bold"
-            configuration={{fontSize: 20}}
+            configuration={{ fontSize: 20 }}
           >
-           Filters
+            Filters
           </Inter>
           <Inter
             htmlAttribute="span"
           >
-           ({countFilters})
+            ({countFilters})
           </Inter>
         </FiltersWrapper>
         <TotalWrappers>
           <Inter
             htmlAttribute="span"
             type="medium"
-            configuration={{fontSize: 14}}
+            configuration={{ fontSize: 14 }}
           >
-           Total:
+            Total:
           </Inter>
           <Inter
             htmlAttribute="span"
             type="medium"
-            configuration={{fontSize: 14}}
+            configuration={{ fontSize: 14 }}
           >
-           {totalProducts}
+            {totalProducts}
           </Inter>
         </TotalWrappers>
       </InfoRow>
-        <FiltersRow>
-          {listFiltersSelected.map(filter => {
-            if (filter.value) {
-              return (
-                <FilterPill
-                  name={filter.name}
-                  value={switchFilterValue(filter.name)}
-                  handleOnClickRemove={() => switchFilterAction(filter.name)}
-                />
-              )
-            }
-          })}
-        </FiltersRow>
+      <FiltersRow>
+        {listFiltersSelected.map(filter => {
+          if (filter.value) {
+            return (
+              <FilterPill
+                name={filter.name}
+                value={switchFilterValue(filter.name)}
+                handleOnClickRemove={() => switchFilterAction(filter.name)}
+              />
+            );
+          }
+        })}
+      </FiltersRow>
       <ResultsContainer>
-        <RatingBottle vote={4} voter='m' />
-        <RatingBottle vote={3.5} voter='i' />
+        {listProducts.length > 0 && listProducts.map(product => (
+          <CardProduct product={product} />
+        ))}
       </ResultsContainer>
     </HomeContainer>
   );
@@ -145,11 +156,14 @@ Home.propTypes = {
 export default connect(
   state => {
     const { filterByTitle, genreSelected, orderSelected } = state.filters;
-    return { filterByTitle, genreSelected, orderSelected }
+    const { productsList } = state.product;
+    return {
+      filterByTitle, genreSelected, orderSelected, productsList
+    };
   },
   dispatch => ({
     setFilterByTitle: (searchValue) => dispatch({ type: SET_FILTER_BY_TITLE, searchValue }),
     setGenre: (genre) => dispatch({ type: SET_GENRE, genre }),
-    setOrder: (order) => dispatch({ type: SET_ORDER, order }),
+    setOrder: (order) => dispatch({ type: SET_ORDER, order })
   })
 )(withMediaQueries(Home));

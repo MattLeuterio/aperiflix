@@ -42,6 +42,7 @@ import MenuMobile from './MenuMobile';
 import FilterPill from './FilterPill';
 import RenderBottles from './RenderBottles';
 import RatingBottle from './RatingBottle';
+import CardProduct from './CardProduct';
 
 export {
   Button,
@@ -87,5 +88,6 @@ export {
   MenuMobile,
   FilterPill,
   RenderBottles,
-  RatingBottle
+  RatingBottle,
+  CardProduct
 };
