@@ -12,7 +12,7 @@ import {
 import { withMediaQueries } from '../../hoc/withMediaQueries';
 import Inter from '../../ui/typography/inter';
 import { CardProduct, FilterPill } from '../../atoms';
-import { SET_FILTER_BY_TITLE, SET_GENRE, SET_ORDER } from '../../redux/actions/filters';
+import { SET_FILTER_BY_TITLE, SET_GENRE } from '../../redux/actions/filters';
 
 const initialListFiltersSelected = [
   {
@@ -30,8 +30,8 @@ const initialListFiltersSelected = [
 ];
 
 const Home = ({
-  filterByTitle, genreSelected, orderSelected,
-  setFilterByTitle, setGenre, setOrder, productsList
+  filterByTitle, genreSelected,
+  setFilterByTitle, setGenre, productsList
 }) => {
   const [listProducts, setListProducts] = useState([]);
   const [countFilters, setCountFilters] = useState(0);
@@ -46,9 +46,6 @@ const Home = ({
         break;
       case 'Genre':
         sel = genreSelected;
-        break;
-      case 'Order':
-        sel = orderSelected;
         break;
 
       default:
@@ -65,9 +62,6 @@ const Home = ({
         break;
       case 'Genre':
         setGenre('');
-        break;
-      case 'Order':
-        setOrder('');
         break;
 
       default:
@@ -86,10 +80,9 @@ const Home = ({
   useEffect(() => {
     setListFiltersSelected([
       { name: 'Query', value: Boolean(filterByTitle) },
-      { name: 'Genre', value: Boolean(genreSelected) },
-      { name: 'Order', value: Boolean(orderSelected) }
+      { name: 'Genre', value: Boolean(genreSelected) }
     ]);
-  }, [filterByTitle, genreSelected, orderSelected]);
+  }, [filterByTitle, genreSelected]);
 
   useEffect(() => {
     setCountFilters(listFiltersSelected.filter(el => el.value).length);
@@ -132,6 +125,7 @@ const Home = ({
         </TotalWrappers>
       </InfoRow>
       <FiltersRow>
+        {/* eslint-disable-next-line array-callback-return,consistent-return */}
         {listFiltersSelected.map(filter => {
           if (filter.value) {
             return (
@@ -167,7 +161,6 @@ export default connect(
   },
   dispatch => ({
     setFilterByTitle: (searchValue) => dispatch({ type: SET_FILTER_BY_TITLE, searchValue }),
-    setGenre: (genre) => dispatch({ type: SET_GENRE, genre }),
-    setOrder: (order) => dispatch({ type: SET_ORDER, order })
+    setGenre: (genre) => dispatch({ type: SET_GENRE, genre })
   })
 )(withMediaQueries(Home));
