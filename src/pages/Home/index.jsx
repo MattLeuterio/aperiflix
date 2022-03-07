@@ -121,8 +121,14 @@ const Home = ({
       });
     }
 
+
+    if (filterByTitle) {
+      const list = newList.length > 0 ? newList : productsList;
+      newList = list.filter(el => el.title.toLowerCase().includes(filterByTitle.toLowerCase()));
+    }
+
     setListProducts(genreList && genreList.length <= 0 ? [] : newList);
-  }, [productTypeSelected, genreSelected, orderSelected]);
+  }, [productTypeSelected, genreSelected, orderSelected, filterByTitle]);
 
   return (
     <HomeContainer>
