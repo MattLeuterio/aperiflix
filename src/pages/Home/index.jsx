@@ -12,7 +12,7 @@ import {
 import { withMediaQueries } from '../../hoc/withMediaQueries';
 import Inter from '../../ui/typography/inter';
 import { CardProduct, FilterPill } from '../../atoms';
-import { SET_FILTER_BY_TITLE, SET_GENRE } from '../../redux/actions/filters';
+import { SET_FILTER_BY_TITLE, SET_GENRE, SET_ORDER } from '../../redux/actions/filters';
 
 const initialListFiltersSelected = [
   {
@@ -31,7 +31,7 @@ const initialListFiltersSelected = [
 
 const Home = ({
   filterByTitle, genreSelected, productTypeSelected,
-  setFilterByTitle, setGenre, productsList, orderSelected
+  setFilterByTitle, setGenre, setOrder, productsList, orderSelected
 }) => {
   const [listProducts, setListProducts] = useState([]);
   const [countFilters, setCountFilters] = useState(0);
@@ -65,6 +65,9 @@ const Home = ({
         break;
       case 'Genre':
         setGenre('');
+        break;
+      case 'Order':
+        setOrder('');
         break;
 
       default:
@@ -120,7 +123,6 @@ const Home = ({
         return totalA - totalB;
       });
     }
-
 
     if (filterByTitle) {
       const list = newList.length > 0 ? newList : productsList;
@@ -205,6 +207,7 @@ export default connect(
   },
   dispatch => ({
     setFilterByTitle: (searchValue) => dispatch({ type: SET_FILTER_BY_TITLE, searchValue }),
-    setGenre: (genre) => dispatch({ type: SET_GENRE, genre })
+    setGenre: (genre) => dispatch({ type: SET_GENRE, genre }),
+    setOrder: (order) => dispatch({ type: SET_ORDER, order })
   })
 )(withMediaQueries(Home));
