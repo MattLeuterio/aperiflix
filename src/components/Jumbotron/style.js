@@ -77,7 +77,7 @@ export const Search = styled.input`
 export const ActionsContainer = styled.div`
   position: relative;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   padding: 0 80px;
   
@@ -103,7 +103,6 @@ export const ProductTypeContainer = styled.div`
     transform: translateX(-50%);
   }
 `;
-export const DisplayContainer = styled.div``;
 export const FiltersActionsContainer = styled.div`
   display: flex;
   justify-content: space-between;

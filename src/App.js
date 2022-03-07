@@ -38,7 +38,6 @@ const App = ({
   useEffect(() => {
     setProducts(listProducts);
   }, [listProducts, setProducts]);
-  console.log(listProducts);
   return (
     <ThemeProvider theme={theme}>
       <Router history={history}>

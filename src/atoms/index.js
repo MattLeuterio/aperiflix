@@ -33,7 +33,6 @@ import GoBack from './GoBack';
 
 import FiltersButton from './FiltersButton';
 import ProductType from './ProductType';
-import DisplayType from './DisplayType';
 import Genre from './Genre';
 import Order from './Order';
 import Search from './Search';
@@ -80,7 +79,6 @@ export {
 
   FiltersButton,
   ProductType,
-  DisplayType,
   Genre,
   Order,
   Search,

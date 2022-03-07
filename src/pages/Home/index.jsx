@@ -30,8 +30,8 @@ const initialListFiltersSelected = [
 ];
 
 const Home = ({
-  filterByTitle, genreSelected,
-  setFilterByTitle, setGenre, productsList
+  filterByTitle, genreSelected, productTypeSelected,
+  setFilterByTitle, setGenre, productsList, orderSelected
 }) => {
   const [listProducts, setListProducts] = useState([]);
   const [countFilters, setCountFilters] = useState(0);
@@ -46,6 +46,9 @@ const Home = ({
         break;
       case 'Genre':
         sel = genreSelected;
+        break;
+      case 'Order':
+        sel = orderSelected;
         break;
 
       default:
@@ -80,15 +83,46 @@ const Home = ({
   useEffect(() => {
     setListFiltersSelected([
       { name: 'Query', value: Boolean(filterByTitle) },
-      { name: 'Genre', value: Boolean(genreSelected) }
+      { name: 'Genre', value: Boolean(genreSelected) },
+      { name: 'Order', value: Boolean(orderSelected) }
     ]);
-  }, [filterByTitle, genreSelected]);
+  }, [filterByTitle, genreSelected, orderSelected]);
 
   useEffect(() => {
     setCountFilters(listFiltersSelected.filter(el => el.value).length);
   }, [listFiltersSelected]);
 
-  console.log('listFiltersSelected', listFiltersSelected);
+  useEffect(() => {
+    let newList = [];
+    let genreList;
+
+    if ((productTypeSelected !== 'all')) {
+      const list = newList.length > 0 ? newList : productsList;
+      newList = list.filter(el => el.productType.toLowerCase() === productTypeSelected);
+    } else {
+      newList = productsList;
+    }
+
+    if (genreSelected) {
+      const list = newList.length > 0 ? newList : productsList;
+      newList = list.filter(el => el.genre.toLowerCase() === genreSelected.toLowerCase());
+      genreList = newList;
+    }
+
+    if (orderSelected) {
+      const list = newList.length > 0 ? newList : productsList;
+      newList = list.sort((a, b) => {
+        const totalA = (a.mVote || 0) + (a.iVote || 0);
+        const totalB = (b.mVote || 0) + (b.iVote || 0);
+        if (orderSelected === 'More Drunks') {
+          return totalB - totalA;
+        }
+        return totalA - totalB;
+      });
+    }
+
+    setListProducts(genreList && genreList.length <= 0 ? [] : newList);
+  }, [productTypeSelected, genreSelected, orderSelected]);
 
   return (
     <HomeContainer>
@@ -139,9 +173,11 @@ const Home = ({
         })}
       </FiltersRow>
       <ResultsContainer>
-        {listProducts.length > 0 && listProducts.map(product => (
+        {listProducts.length > 0 ? listProducts.map(product => (
           <CardProduct product={product} />
-        ))}
+        )) : (
+          <div>No result</div>
+        )}
       </ResultsContainer>
     </HomeContainer>
   );
@@ -153,10 +189,12 @@ Home.propTypes = {
 
 export default connect(
   state => {
-    const { filterByTitle, genreSelected, orderSelected } = state.filters;
+    const {
+      filterByTitle, genreSelected, orderSelected, productType: productTypeSelected
+    } = state.filters;
     const { productsList } = state.product;
     return {
-      filterByTitle, genreSelected, orderSelected, productsList
+      filterByTitle, genreSelected, orderSelected, productsList, productTypeSelected
     };
   },
   dispatch => ({

@@ -22,9 +22,7 @@ const initialState = {
 
 const appReducer = (state = initialState, action) => produce(state, draft => {
   switch (action.type) {
-
     case SET_PRODUCTS: {
-      console.log('action.products', action)
       draft.productsList = action.products;
       break;
     }
