@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import Arial from '../../ui/typography/arial';
 import {
-  ButtonContainer, Container, IconContainer, Product
+  Container, Product
 } from './style';
 import theme from '../../ui/theme';
-import { FilterOutline as FilterIcon } from 'react-ionicons';
 import Inter from '../../ui/typography/inter';
 import compose from '../../redux/compose';
-import { connect } from 'react-redux';
-import { SET_FILTERS_CLOSE, SET_FILTERS_OPEN, SET_PRODUCT_TYPE } from '../../redux/actions/filters';
-import { AUTH_LOGOUT } from '../../redux/actions/auth';
-import { SET_SELECTED_LABELS, SET_SELECTED_PUBLISHERS } from '../../redux/actions';
+import { SET_PRODUCT_TYPE } from '../../redux/actions/filters';
 import { withMediaQueries } from '../../hoc/withMediaQueries';
 
 const productTypeList = [
@@ -31,7 +26,7 @@ const productTypeList = [
 ]
 
 const ProductType = ({
-  setProductType, productTypeState
+  setProductType
 }) => {
   const [typeSelected, setTypeSelected] = useState('all');
   const handleOnSelectType = (type) => {
@@ -43,22 +38,23 @@ const ProductType = ({
   }, [typeSelected]);
 
   return (
-  <Container>
-    {productTypeList.map((prType) => (
-      <Product
-        onClick={() => handleOnSelectType(prType.type)}
-      >
-        <Inter
-          type='italic'
-          configuration={prType.type === typeSelected && {fontWeight: 700, color: theme.colors.primary.red}}
+    <Container>
+      {productTypeList.map((prType) => (
+        <Product
+          key={prType.name}
+          onClick={() => handleOnSelectType(prType.type)}
         >
-          {prType.name}
-        </Inter>
-      </Product>
-    ))}
-  </Container>
+          <Inter
+            type="italic"
+            configuration={prType.type === typeSelected && { fontWeight: 700, color: theme.colors.primary.red }}
+          >
+            {prType.name}
+          </Inter>
+        </Product>
+      ))}
+    </Container>
   );
-}
+};
 
 ProductType.propTypes = {
 };

@@ -9,3 +9,5 @@ export function createAsyncActionType(section = '', type = '') {
 }
 
 export const SET_PRODUCTS = '@@products/SET_PRODUCTS';
+export const GET_PRODUCT_DETAILS = createAsyncActionType('product', 'GET_PRODUCT_DETAILS');
+export const GET_PRODUCT_VIDEO = createAsyncActionType('product', 'GET_PRODUCT_VIDEO');

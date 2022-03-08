@@ -13,6 +13,8 @@ import { withMediaQueries } from '../../hoc/withMediaQueries';
 import Inter from '../../ui/typography/inter';
 import { CardProduct, FilterPill } from '../../atoms';
 import { SET_FILTER_BY_TITLE, SET_GENRE, SET_ORDER } from '../../redux/actions/filters';
+// eslint-disable-next-line import/extensions
+import { ProductDetailsPanel } from '../../components';
 
 const initialListFiltersSelected = [
   {
@@ -33,6 +35,8 @@ const Home = ({
   filterByTitle, genreSelected, productTypeSelected,
   setFilterByTitle, setGenre, setOrder, productsList, orderSelected
 }) => {
+  const [detailsPanelIsOpen, setDetailsPanelIsOpen] = useState(false);
+  const [productSelected, setProductSelected] = useState(productSelected);
   const [listProducts, setListProducts] = useState([]);
   const [countFilters, setCountFilters] = useState(0);
   const [totalProducts, setTotalProducts] = useState(0);
@@ -132,62 +136,79 @@ const Home = ({
     setListProducts(genreList && genreList.length <= 0 ? [] : newList);
   }, [productTypeSelected, genreSelected, orderSelected, filterByTitle]);
 
+  const handleOnClickCard = (product) => {
+    setDetailsPanelIsOpen(true);
+    setProductSelected(product);
+  }
+
   return (
-    <HomeContainer>
-      <InfoRow>
-        <FiltersWrapper>
-          <Inter
-            htmlAttribute="span"
-            type="bold"
-            configuration={{ fontSize: 20 }}
-          >
-            Filters
-          </Inter>
-          <Inter
-            htmlAttribute="span"
-          >
-            ({countFilters})
-          </Inter>
-        </FiltersWrapper>
-        <TotalWrappers>
-          <Inter
-            htmlAttribute="span"
-            type="medium"
-            configuration={{ fontSize: 14 }}
-          >
-            Total:
-          </Inter>
-          <Inter
-            htmlAttribute="span"
-            type="medium"
-            configuration={{ fontSize: 14 }}
-          >
-            {totalProducts}
-          </Inter>
-        </TotalWrappers>
-      </InfoRow>
-      <FiltersRow>
-        {/* eslint-disable-next-line array-callback-return,consistent-return */}
-        {listFiltersSelected.map(filter => {
-          if (filter.value) {
-            return (
-              <FilterPill
-                name={filter.name}
-                value={switchFilterValue(filter.name)}
-                handleOnClickRemove={() => switchFilterAction(filter.name)}
-              />
-            );
-          }
-        })}
-      </FiltersRow>
-      <ResultsContainer>
-        {listProducts.length > 0 ? listProducts.map(product => (
-          <CardProduct product={product} />
-        )) : (
-          <div>No result</div>
-        )}
-      </ResultsContainer>
-    </HomeContainer>
+    <>
+      <HomeContainer>
+        <InfoRow>
+          <FiltersWrapper>
+            <Inter
+              htmlAttribute="span"
+              type="bold"
+              configuration={{ fontSize: 20 }}
+            >
+              Filters
+            </Inter>
+            <Inter
+              htmlAttribute="span"
+            >
+              ({countFilters})
+            </Inter>
+          </FiltersWrapper>
+          <TotalWrappers>
+            <Inter
+              htmlAttribute="span"
+              type="medium"
+              configuration={{ fontSize: 14 }}
+            >
+              Total:
+            </Inter>
+            <Inter
+              htmlAttribute="span"
+              type="medium"
+              configuration={{ fontSize: 14 }}
+            >
+              {totalProducts}
+            </Inter>
+          </TotalWrappers>
+        </InfoRow>
+        <FiltersRow>
+          {/* eslint-disable-next-line array-callback-return,consistent-return */}
+          {listFiltersSelected.map(filter => {
+            if (filter.value) {
+              return (
+                <FilterPill
+                  key={filter.name}
+                  name={filter.name}
+                  value={switchFilterValue(filter.name)}
+                  handleOnClickRemove={() => switchFilterAction(filter.name)}
+                />
+              );
+            }
+          })}
+        </FiltersRow>
+        <ResultsContainer>
+          {listProducts.length > 0 ? listProducts.map(product => (
+            <CardProduct
+              key={product.id}
+              product={product}
+              onClickCard={() => handleOnClickCard(product)}
+            />
+          )) : (
+            <div>No result</div>
+          )}
+        </ResultsContainer>
+      </HomeContainer>
+      <ProductDetailsPanel
+        product={productSelected}
+        isOpen={detailsPanelIsOpen}
+        onClose={() => setDetailsPanelIsOpen(false)}
+      />
+    </>
   );
 };
 

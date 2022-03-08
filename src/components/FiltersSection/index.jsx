@@ -20,7 +20,7 @@ const FiltersSection = ({
         <Inter type="bold">Genres</Inter>
         <Genres>
           {genresList.map((genre) => (
-            <Genre nameGenre={genre.name} />
+            <Genre key={genre.name} nameGenre={genre.name} />
           ))}
         </Genres>
       </Section>
@@ -28,7 +28,7 @@ const FiltersSection = ({
         <Inter type="bold">Orders</Inter>
         <Orders>
           {ordersList.map((order) => (
-            <Order nameOrder={order.name} />
+            <Order key={order.name} nameOrder={order.name} />
           ))}
         </Orders>
       </Section>
@@ -40,7 +40,7 @@ const composed = compose(
   connect(
     state => {
       const { filtersOpen } = state.filters;
-      return { filtersOpen }
+      return { filtersOpen };
     },
     dispatch => ({
     })

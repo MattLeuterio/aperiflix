@@ -51,62 +51,37 @@ const types = {
     fontSize: 12
   },
   cardGenre: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: 300,
     fontStyle: 'italic'
   },
   cardTitle: {
-    fontSize: 22,
-    fontWeight: 600
+    fontSize: 18,
+    fontWeight: 500
   },
   cardProductType: {
-    fontSize: 14,
-    fontWeight: 600
-  },
-  headerUser: {
-    color: theme.colors.custom.blue,
-    fontWeight: 500
-  },
-  modalTitle: {
-    fontSize: 22,
-    color: theme.colors.custom.darkText,
-    fontWeight: 500
-  },
-  youtubeLabel: {
     fontSize: 12,
-    color: theme.colors.custom.youtube,
+    fontWeight: 500
+  },
+  prodDetailsDate: {
+    fontSize: 18,
+    fontWeight: 700
+  },
+  prodDetailsGenre: {
+    fontSize: 18,
     fontWeight: 500,
-    textTransform: 'capitalize'
+    fontStyle: 'italic'
   },
-  dailymotionLabel: {
-    fontSize: 12,
-    color: theme.colors.custom.dailymotion,
-    fontWeight: 500,
-    textTransform: 'capitalize'
+  prodDetailsRuntime: {
+    fontSize: 18
   },
-  dailyLabel: {
-    fontSize: 12,
-    color: theme.colors.custom.dailymotion,
-    fontWeight: 500,
-    textTransform: 'capitalize'
+  prodDetailsTitle: {
+    fontSize: 32
   },
-  labelCardUser: {
-    fontSize: 12,
-    color: theme.colors.custom.darkGray,
-    fontWeight: 500
-  },
-  goBack: {
-    fontSize: 24,
-    color: theme.colors.custom.darkText,
-    fontWeight: 500
-  },
-  widthHeightMessage: {
-    fontSize: 12,
-    color: theme.colors.custom.darkText,
-    fontStyle: 'italic',
-    lineHeight: 1.4
+  prodVideoType: {
+    fontWeight: 300,
+    fontStyle: 'italic'
   }
-
 };
 
 const Inter = ({

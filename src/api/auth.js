@@ -1,5 +1,5 @@
 import {
-  apiCall, basePrivate, basePublic
+  apiCall
 } from './config';
 import { shouldUseMock } from '../utils/common';
 import { authLoginMock, authLogoutMock, authRefreshMock } from './mock/index';
@@ -17,7 +17,7 @@ export default {
     if (shouldUseMock()) {
       return authLogoutMock();
     }
-    return apiCall(`${basePrivate}${baseAuth}logout`, 'POST', body);
+    return apiCall(`${baseAuth}logout`, 'POST', body);
   },
   authRefresh: (body) => {
     if (shouldUseMock()) {

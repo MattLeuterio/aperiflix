@@ -124,8 +124,5 @@ export default {
       return getSftpOptionsByPublisherMock();
     }
     return apiCall(`publisher/upload/server/options${parseQueryParams(params)}`, 'GET');
-  },
-  getContents: () => {
-    return getContent('movie');
   }
 };

@@ -14,16 +14,30 @@ import { AUTH_LOGOUT, AUTH_LOGIN } from '../actions/auth';
 import { Toast } from '../../components';
 import storage from '../../utils/storage';
 import { setToken } from '../../utils/token';
-import { SET_PRODUCTS } from '../actions/product';
+import { GET_PRODUCT_DETAILS, GET_PRODUCT_VIDEO, SET_PRODUCTS } from '../actions/product';
 
 const initialState = {
   productsList: [],
+  productSelectedDetails: [],
+  productSelectedVideo: []
 };
 
 const appReducer = (state = initialState, action) => produce(state, draft => {
   switch (action.type) {
     case SET_PRODUCTS: {
       draft.productsList = action.products;
+      break;
+    }
+    case GET_PRODUCT_DETAILS._SUCCESS: {
+      const { data } = action;
+      console.log('data reduce', action);
+      draft.productSelectedDetails = data;
+      break;
+    }
+    case GET_PRODUCT_VIDEO._SUCCESS: {
+      const { data } = action;
+      console.log('data reduce', action);
+      draft.productSelectedVideo = data.results;
       break;
     }
 

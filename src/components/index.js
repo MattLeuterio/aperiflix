@@ -11,8 +11,9 @@ import AdminCardPublisher from './AdminCardPublisher';
 import CardVideo from './CardVideo';
 import HtmlRaw from './HtmlRaw';
 
-import Jumbotron from './Jumbotron'
-import FiltersSection from './FiltersSection'
+import Jumbotron from './Jumbotron';
+import FiltersSection from './FiltersSection';
+import ProductDetailsPanel from './ProductDetailsPanel';
 
 export {
   GlobalLayout,
@@ -31,4 +32,5 @@ export {
 
   Jumbotron,
   FiltersSection,
+  ProductDetailsPanel
 };

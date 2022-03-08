@@ -16,6 +16,7 @@ export const PageContainer = styled.div`
 export const PageContent = styled.div`
   min-height: calc(100vh - ${NavBarHeight}px);
   padding-top: calc(${NavBarHeight}px + 50px);
+  padding-bottom: 50px;
   overflow: auto;
   position: relative;
   flex-grow: 1;

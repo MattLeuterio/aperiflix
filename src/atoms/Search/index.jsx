@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import {
+  SearchOutline as SearchIcon,
+  CloseOutline as CloseIcon
+} from 'react-ionicons';
 import compose from '../../redux/compose';
 
 import {
@@ -8,10 +12,6 @@ import {
 } from './style';
 import { withMediaQueries } from '../../hoc/withMediaQueries';
 import theme from '../../ui/theme';
-import { 
-  SearchOutline as SearchIcon,
-  CloseOutline as CloseIcon 
-} from 'react-ionicons';
 import { SET_FILTER_BY_TITLE } from '../../redux/actions/filters';
 
 const Search = ({
@@ -47,9 +47,9 @@ const Search = ({
       />
       {filterByTitle.length > 0 && (
         <CloseIcon
-          className='iconClose'
+          className="iconClose"
           color={theme.colors.primary.white}
-          onClick={() => setFilterByTitle ('')}
+          onClick={() => setFilterByTitle('')}
           height="24px"
           width="24px"
         />
