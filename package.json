@@ -44,7 +44,7 @@
   "scripts": {
     "start": "cross-env REACT_APP_DEPLOY_ENV=LOCAL REACT_APP_ENABLE_MOCK=1 react-scripts start",
     "start:dev": "cross-env REACT_APP_DEPLOY_ENV=DEV react-scripts start",
-    "build": "cross-env REACT_APP_DEPLOY_ENV=LOCAL PUBLIC_URL=/ react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

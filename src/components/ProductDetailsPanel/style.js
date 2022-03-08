@@ -23,6 +23,10 @@ export const Container = styled.div`
       right: 36px;
     }
   }
+
+  @media ${props => props.theme.device.tablet} {
+    height: ${props => (props.isOpen ? '75vh' : '0px')};
+  }
 `;
 
 export const Content = styled.div`
