@@ -11,9 +11,8 @@ const Genre = ({
 }) => {
   const handleOnClickGenre = (genre) => {
     setGenre(genre);
-  }
+  };
 
-  console.log('genreSelected', genreSelected);
   return (
     <Inter
       type="h4"

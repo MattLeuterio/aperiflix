@@ -10,11 +10,9 @@ const client = contentful.createClient({
 const getContent = (contentType, set) => {
   const data = client.getEntries({ content_type: `${contentType}` }).then((response) => {
     const res = response.items;
-    console.log('res', res);
     const data = res.map(obj => {
       return remapContent(contentType, obj);
-    })
-    console.log('data', data);
+    });
     set(data);
   }, []);
   set(data);

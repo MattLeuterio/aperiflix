@@ -18,7 +18,7 @@ import { ProductDetailsPanel } from '../../components';
 
 const initialListFiltersSelected = [
   {
-    name: 'Query',
+    name: 'Title',
     value: false
   },
   {
@@ -45,7 +45,7 @@ const Home = ({
   const switchFilterValue = (name) => {
     let sel = null;
     switch (name) {
-      case 'Query':
+      case 'Title':
         sel = filterByTitle;
         break;
       case 'Genre':
@@ -64,7 +64,7 @@ const Home = ({
 
   const switchFilterAction = (name) => {
     switch (name) {
-      case 'Query':
+      case 'Title':
         setFilterByTitle('');
         break;
       case 'Genre':
@@ -89,7 +89,7 @@ const Home = ({
 
   useEffect(() => {
     setListFiltersSelected([
-      { name: 'Query', value: Boolean(filterByTitle) },
+      { name: 'Title', value: Boolean(filterByTitle) },
       { name: 'Genre', value: Boolean(genreSelected) },
       { name: 'Order', value: Boolean(orderSelected) }
     ]);

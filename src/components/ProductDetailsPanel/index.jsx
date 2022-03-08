@@ -41,14 +41,11 @@ const ProductDetailsPanel = ({
 
   useEffect(() => {
     if (videoProduct) {
-      console.log('videoProduct', videoProduct);
       const video = videoProduct.find(el => el.site === 'YouTube' && el.type === 'Trailer');
-      console.log('video', video);
       setVideo(video);
     }
   }, [videoProduct]);
 
-  console.log('product', product);
   return (
     <Container isOpen={isOpen}>
       <CloseIcon
@@ -70,7 +67,7 @@ const ProductDetailsPanel = ({
               )}
               <Genre>
                 <Inter type="prodDetailsGenre">{details?.genres?.map((genre) => (
-                  <span>{genre.name}</span>
+                  <span key={genre.name}>{genre.name}</span>
                 ))}
                 </Inter>
               </Genre>

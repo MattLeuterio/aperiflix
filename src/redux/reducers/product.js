@@ -30,13 +30,11 @@ const appReducer = (state = initialState, action) => produce(state, draft => {
     }
     case GET_PRODUCT_DETAILS._SUCCESS: {
       const { data } = action;
-      console.log('data reduce', action);
       draft.productSelectedDetails = data;
       break;
     }
     case GET_PRODUCT_VIDEO._SUCCESS: {
       const { data } = action;
-      console.log('data reduce', action);
       draft.productSelectedVideo = data.results;
       break;
     }
