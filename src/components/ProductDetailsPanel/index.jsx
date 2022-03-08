@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { CloseOutline as CloseIcon } from 'react-ionicons';
+import { CloseOutline as CloseIcon, VideocamOffOutline as NoVideoIcon } from 'react-ionicons';
 import {
   Body,
   Container,
@@ -15,7 +15,7 @@ import {
   RowInfo,
   RowRating,
   VideoWrapper,
-  Detail
+  Detail, NoVideoWrapper
 } from './style';
 import theme from '../../ui/theme';
 import { GET_PRODUCT_DETAILS, GET_PRODUCT_VIDEO } from '../../redux/actions/product';
@@ -101,7 +101,14 @@ const ProductDetailsPanel = ({
                 controls
               />
             ) : (
-              <div>No video</div>
+              <NoVideoWrapper>
+                <NoVideoIcon
+                  color={theme.colors.primary.white}
+                  onClick={() => onClose()}
+                  height="30px"
+                  width="30px"
+                />
+              </NoVideoWrapper>
             )}
           </VideoWrapper>
           <DetailsProduct>

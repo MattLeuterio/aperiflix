@@ -142,3 +142,22 @@ export const Detail = styled.div`
     margin-bottom: 5px;
   }
 `;
+
+export const NoVideoWrapper = styled.div`
+  background: #2f3143;
+  width: 100%;
+  height: 340px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media ${props => props.theme.device.tablet} {
+    width: 100%;
+    height: 450px;
+  }
+
+  @media ${props => props.theme.device.mobileM} {
+    width: 100%;
+    height: 240px;
+  }
+`;

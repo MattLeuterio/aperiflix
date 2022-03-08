@@ -58,3 +58,30 @@ export const ResultsContainer = styled.div`
     justify-content: center;
   }
 `;
+
+export const NoResultWrapper = styled.div`
+  width: 100%;
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #2f3143;
+  
+  
+  > div:first-child {
+    font-size: 14px;
+    color: ${props => props.theme.colors.primary.red};
+    font-style: 'italic';
+    margin-right: 10px;
+  }
+`;
+
+export const BottleRender = styled.div`
+  display: inline-block;
+  width: 18px;
+  height: 32px;
+  background-image: url(${props => props.srcBg});
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+`;

@@ -7,7 +7,8 @@ import {
   HomeContainer,
   InfoRow,
   ResultsContainer,
-  TotalWrappers
+  TotalWrappers,
+  BottleRender, NoResultWrapper
 } from './style';
 import { withMediaQueries } from '../../hoc/withMediaQueries';
 import Inter from '../../ui/typography/inter';
@@ -15,6 +16,7 @@ import { CardProduct, FilterPill } from '../../atoms';
 import { SET_FILTER_BY_TITLE, SET_GENRE, SET_ORDER } from '../../redux/actions/filters';
 // eslint-disable-next-line import/extensions
 import { ProductDetailsPanel } from '../../components';
+import EmptyBottle from '../../ui/assets/img/rating/bottle-empty.png';
 
 const initialListFiltersSelected = [
   {
@@ -199,7 +201,11 @@ const Home = ({
               onClickCard={() => handleOnClickCard(product)}
             />
           )) : (
-            <div>No result</div>
+            <NoResultWrapper>
+              <Inter>Nessun risultato</Inter>
+              <BottleRender srcBg={EmptyBottle}>
+              </BottleRender>
+            </NoResultWrapper>
           )}
         </ResultsContainer>
       </HomeContainer>
