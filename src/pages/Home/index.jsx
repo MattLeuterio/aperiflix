@@ -13,7 +13,9 @@ import {
 import { withMediaQueries } from '../../hoc/withMediaQueries';
 import Inter from '../../ui/typography/inter';
 import { CardProduct, FilterPill } from '../../atoms';
-import { SET_FILTER_BY_TITLE, SET_GENRE, SET_ORDER } from '../../redux/actions/filters';
+import {
+  SET_FILTER_BY_TITLE, SET_FILTERS_CLOSE, SET_GENRE, SET_ORDER
+} from '../../redux/actions/filters';
 // eslint-disable-next-line import/extensions
 import { ProductDetailsPanel } from '../../components';
 import EmptyBottle from '../../ui/assets/img/rating/bottle-empty.png';
@@ -35,10 +37,11 @@ const initialListFiltersSelected = [
 
 const Home = ({
   filterByTitle, genreSelected, productTypeSelected,
-  setFilterByTitle, setGenre, setOrder, productsList, orderSelected
+  setFilterByTitle, setGenre, setOrder, productsList,
+  orderSelected, filtersOpen, setFiltersPanelClose
 }) => {
   const [detailsPanelIsOpen, setDetailsPanelIsOpen] = useState(false);
-  const [productSelected, setProductSelected] = useState(productSelected);
+  const [productSelected, setProductSelected] = useState({});
   const [listProducts, setListProducts] = useState([]);
   const [countFilters, setCountFilters] = useState(0);
   const [totalProducts, setTotalProducts] = useState(0);
@@ -139,9 +142,10 @@ const Home = ({
   }, [productTypeSelected, genreSelected, orderSelected, filterByTitle]);
 
   const handleOnClickCard = (product) => {
+    if (filtersOpen) setFiltersPanelClose();
     setDetailsPanelIsOpen(true);
     setProductSelected(product);
-  }
+  };
 
   return (
     <>
@@ -203,8 +207,7 @@ const Home = ({
           )) : (
             <NoResultWrapper>
               <Inter>Nessun risultato</Inter>
-              <BottleRender srcBg={EmptyBottle}>
-              </BottleRender>
+              <BottleRender srcBg={EmptyBottle} />
             </NoResultWrapper>
           )}
         </ResultsContainer>
@@ -225,16 +228,19 @@ Home.propTypes = {
 export default connect(
   state => {
     const {
-      filterByTitle, genreSelected, orderSelected, productType: productTypeSelected
+      filterByTitle, genreSelected, orderSelected,
+      productType: productTypeSelected, filtersOpen
     } = state.filters;
     const { productsList } = state.product;
     return {
-      filterByTitle, genreSelected, orderSelected, productsList, productTypeSelected
+      filterByTitle, genreSelected, orderSelected,
+      productsList, productTypeSelected, filtersOpen
     };
   },
   dispatch => ({
     setFilterByTitle: (searchValue) => dispatch({ type: SET_FILTER_BY_TITLE, searchValue }),
     setGenre: (genre) => dispatch({ type: SET_GENRE, genre }),
-    setOrder: (order) => dispatch({ type: SET_ORDER, order })
+    setOrder: (order) => dispatch({ type: SET_ORDER, order }),
+    setFiltersPanelClose: () => dispatch({ type: SET_FILTERS_CLOSE })
   })
 )(withMediaQueries(Home));
