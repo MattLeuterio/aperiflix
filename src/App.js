@@ -21,8 +21,6 @@ import routes from './routes';
 import {
   Home
 } from './pages';
-import ModalsPortal from './components/Modals/ModalsPortal';
-import ErrorModal from './components/Modals/ErrorModal';
 import { GET_AVAILABLE_PLATFORM, GET_LABELS, GET_PUBLISHERS } from './redux/actions';
 import { getContent } from './contentful';
 import { SET_PRODUCTS } from './redux/actions/product';
@@ -64,8 +62,6 @@ const App = ({
         </GlobalLayout>
       </Router>
       <Toast />
-      <ModalsPortal.Target />
-      <ErrorModal />
     </ThemeProvider>
   );
 };

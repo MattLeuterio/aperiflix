@@ -8,7 +8,6 @@ import {
   Loader
 } from '../index';
 import { PageContainer, PageContent } from './styles';
-import WarningModal from '../Modals/WarningModal';
 import { AUTH_LOGOUT } from '../../redux/actions/auth';
 import { withMediaQueries } from '../../hoc/withMediaQueries';
 import { heightHeaderShow } from '../../const';
@@ -49,7 +48,6 @@ const GlobalLayout = ({
           {children}
         </PageContent>
       </PageContainer>
-      <WarningModal />
     </>
   );
 };

@@ -4,7 +4,6 @@ import {
 
 import { LOADER_CLOSE, LOADER_OPEN, MODAL_OPEN } from '../actions';
 import { GET_YT_PLAYLIST_PUBLISHER, UPLOAD_VIDEO } from '../actions/upload';
-import ErrorModal from '../../components/Modals/ErrorModal';
 import upload from '../../api/upload';
 import Toast from '../../components/Toast';
 import { getLabelValue } from '../../utils/common';

@@ -8,7 +8,6 @@ import { AUTH_LOGIN, AUTH_LOGOUT } from '../actions/auth';
 import auth from '../../api/auth';
 import { dismissKeepTokenAlive, getToken } from '../../utils/token';
 import storage from '../../utils/storage';
-import ErrorModal from '../../components/Modals/ErrorModal';
 import routes from '../../routes';
 
 function* appReload() {
@@ -43,7 +42,7 @@ function* authLogin({ authForm: { username, password } = {} }) {
     yield put({ type: AUTH_LOGIN._ERROR, err: { message: 'Attenzione, credenziali errate!' } });
     yield put({
       type: MODAL_OPEN,
-      id: ErrorModal.id,
+      id: '1',
       payload: {
         errorText:
           'Attenzione, credenziali errate!'

@@ -23,7 +23,6 @@ import {
   GET_DEFAULT_TEMPLATE_BY_PUBLISHER,
   GET_SFTP_OPTIONS_BY_PUBLISHER
 } from '../actions/admin';
-import ErrorModal from '../../components/Modals/ErrorModal';
 
 import admin from '../../api/admin';
 import { Toast } from '../../components';
