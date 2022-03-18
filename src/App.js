@@ -14,14 +14,12 @@ import { connect } from 'react-redux';
 import theme from './ui/theme';
 import { history } from './redux/store';
 
-import { GlobalLayout, Loader, Toast } from './components';
+import { GlobalLayout, Toast } from './components';
 import routes from './routes';
 
-/* Pages */
 import {
   Home
 } from './pages';
-import { GET_AVAILABLE_PLATFORM, GET_LABELS, GET_PUBLISHERS } from './redux/actions';
 import { getContent } from './contentful';
 import { SET_PRODUCTS } from './redux/actions/product';
 
@@ -39,7 +37,6 @@ const App = ({
   return (
     <ThemeProvider theme={theme}>
       <Router history={history}>
-        <Loader />
         <GlobalLayout>
           <Switch>
             <>

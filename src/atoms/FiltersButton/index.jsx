@@ -1,18 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Arial from '../../ui/typography/arial';
-import { ButtonContainer, Container, IconContainer } from './style';
-import theme from '../../ui/theme';
 import { FilterOutline as FilterIcon } from 'react-ionicons';
+import { connect } from 'react-redux';
+// eslint-disable-next-line import/no-cycle
+import { Container } from './style';
 import Inter from '../../ui/typography/inter';
 import compose from '../../redux/compose';
-import { connect } from 'react-redux';
-import { AUTH_LOGOUT } from '../../redux/actions/auth';
-import {
-  SET_SELECTED_LABELS,
-  SET_SELECTED_PUBLISHERS
-} from '../../redux/actions';
 import { withMediaQueries } from '../../hoc/withMediaQueries';
 import {
   SET_FILTERS_CLOSE,
@@ -65,7 +59,7 @@ const composed = compose(
     },
     dispatch => ({
       setFiltersOpen: () => dispatch({ type: SET_FILTERS_OPEN }),
-      setFiltersClose: () => dispatch({ type: SET_FILTERS_CLOSE }),
+      setFiltersClose: () => dispatch({ type: SET_FILTERS_CLOSE })
     })
   ),
   withMediaQueries

@@ -5,10 +5,8 @@ import { connect } from 'react-redux';
 import {
   FiltersSection,
   Jumbotron,
-  Loader
 } from '../index';
 import { PageContainer, PageContent } from './styles';
-import { AUTH_LOGOUT } from '../../redux/actions/auth';
 import { withMediaQueries } from '../../hoc/withMediaQueries';
 import { heightHeaderShow } from '../../const';
 import { Header } from '../../atoms';
@@ -32,7 +30,6 @@ const GlobalLayout = ({
 
   return (
     <>
-      <Loader />
       <Header isVisible={mediaIsPhone || scrollPosition >= heightHeaderShow} />
       {(!mediaIsPhone) && (
         <FiltersSection isHeader={scrollPosition >= heightHeaderShow} />
@@ -60,6 +57,5 @@ export default connect(
   state => {
   },
   dispatch => ({
-    logout: () => dispatch({ type: AUTH_LOGOUT._REQUEST })
   })
 )(withMediaQueries(GlobalLayout));
