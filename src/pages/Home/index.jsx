@@ -19,6 +19,7 @@ import {
 // eslint-disable-next-line import/extensions
 import { ProductDetailsPanel } from '../../components';
 import EmptyBottle from '../../ui/assets/img/rating/bottle-empty.png';
+import { RESET_PRODUCT_DETAILS } from '../../redux/actions/product';
 
 const initialListFiltersSelected = [
   {
@@ -38,7 +39,8 @@ const initialListFiltersSelected = [
 const Home = ({
   filterByTitle, genreSelected, productTypeSelected,
   setFilterByTitle, setGenre, setOrder, productsList,
-  orderSelected, filtersOpen, setFiltersPanelClose
+  orderSelected, filtersOpen, setFiltersPanelClose,
+                resetDetailsPanel
 }) => {
   const [detailsPanelIsOpen, setDetailsPanelIsOpen] = useState(false);
   const [productSelected, setProductSelected] = useState({});
@@ -147,6 +149,11 @@ const Home = ({
     setProductSelected(product);
   };
 
+  const onCloseProductDetailsPanel = () => {
+    resetDetailsPanel();
+    setDetailsPanelIsOpen(false);
+  };
+
   return (
     <>
       <HomeContainer>
@@ -215,7 +222,7 @@ const Home = ({
       <ProductDetailsPanel
         product={productSelected}
         isOpen={detailsPanelIsOpen}
-        onClose={() => setDetailsPanelIsOpen(false)}
+        onClose={() => onCloseProductDetailsPanel()}
       />
     </>
   );
@@ -241,6 +248,7 @@ export default connect(
     setFilterByTitle: (searchValue) => dispatch({ type: SET_FILTER_BY_TITLE, searchValue }),
     setGenre: (genre) => dispatch({ type: SET_GENRE, genre }),
     setOrder: (order) => dispatch({ type: SET_ORDER, order }),
-    setFiltersPanelClose: () => dispatch({ type: SET_FILTERS_CLOSE })
+    setFiltersPanelClose: () => dispatch({ type: SET_FILTERS_CLOSE }),
+    resetDetailsPanel: () => dispatch({ type: RESET_PRODUCT_DETAILS })
   })
 )(withMediaQueries(Home));

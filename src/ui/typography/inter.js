@@ -78,6 +78,10 @@ const types = {
   prodDetailsTitle: {
     fontSize: 32
   },
+  prodDetailsSummary: {
+    fontSize: 14,
+    lineHeight: 1.5
+  },
   prodVideoType: {
     fontWeight: 300,
     fontStyle: 'italic'

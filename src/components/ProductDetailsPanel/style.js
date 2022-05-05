@@ -52,7 +52,7 @@ export const Cover = styled.div`
   width: 207px;
   min-width: 207px;
   height: 308px;
-  background-image: ${props => `url(https://image.tmdb.org/t/p/original/${props.posterPath})`};
+  background-image: ${props => `url(${props.posterPath})`};
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

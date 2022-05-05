@@ -8,10 +8,12 @@ import { GET_PRODUCT_DETAILS, GET_PRODUCT_VIDEO } from '../actions/product';
 function* getProductDetails({ payload }) {
   const type = payload.prodType === 'Film' ? 'movie' : 'tv';
   try {
-    const getProdDetails = () => axios.get(`https://api.themoviedb.org/3/${type}/${payload.id}?api_key=e2330ecaa641a077ab62520c44ab636f&language=it-IT`)
-      .then((response) => response.data);
-    const data = yield call(getProdDetails);
-    yield put({ type: GET_PRODUCT_DETAILS._SUCCESS, data });
+    if (payload.id) {
+      const getProdDetails = () => axios.get(`https://api.themoviedb.org/3/${type}/${payload.id}?api_key=e2330ecaa641a077ab62520c44ab636f&language=it-IT`)
+        .then((response) => response.data);
+      const data = yield call(getProdDetails);
+      yield put({ type: GET_PRODUCT_DETAILS._SUCCESS, data });
+    }
   } catch (err) {
     // eslint-disable-next-line no-console
     console.log('sagas > product > getProductDetails', err);
@@ -26,10 +28,12 @@ function* getProductDetailsWatch() {
 function* getProductVideo({ payload }) {
   const type = payload.prodType === 'Film' ? 'movie' : 'tv';
   try {
-    const getVideo = () => axios.get(`https://api.themoviedb.org/3/${type}/${payload.id}/videos?api_key=e2330ecaa641a077ab62520c44ab636f&language=it-IT`)
-      .then((response) => response.data);
-    const data = yield call(getVideo);
-    yield put({ type: GET_PRODUCT_VIDEO._SUCCESS, data });
+    if (payload.id) {
+      const getVideo = () => axios.get(`https://api.themoviedb.org/3/${type}/${payload.id}/videos?api_key=e2330ecaa641a077ab62520c44ab636f&language=it-IT`)
+        .then((response) => response.data);
+      const data = yield call(getVideo);
+      yield put({ type: GET_PRODUCT_VIDEO._SUCCESS, data });
+    }
   } catch (err) {
     // eslint-disable-next-line no-console
     console.log('sagas > product > getProductDetails', err);

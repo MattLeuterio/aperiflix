@@ -1,10 +1,10 @@
 import produce from 'immer';
 
-import { GET_PRODUCT_DETAILS, GET_PRODUCT_VIDEO, SET_PRODUCTS } from '../actions/product';
+import { GET_PRODUCT_DETAILS, GET_PRODUCT_VIDEO, RESET_PRODUCT_DETAILS, SET_PRODUCTS } from '../actions/product';
 
 const initialState = {
   productsList: [],
-  productSelectedDetails: [],
+  productSelectedDetails: {},
   productSelectedVideo: []
 };
 
@@ -12,6 +12,11 @@ const appReducer = (state = initialState, action) => produce(state, draft => {
   switch (action.type) {
     case SET_PRODUCTS: {
       draft.productsList = action.products;
+      break;
+    }
+    case RESET_PRODUCT_DETAILS: {
+      draft.productSelectedDetails = initialState.productSelectedDetails;
+      draft.productSelectedVideo = initialState.productSelectedVideo;
       break;
     }
     case GET_PRODUCT_DETAILS._SUCCESS: {

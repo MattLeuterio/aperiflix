@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { CloseOutline as CloseIcon, VideocamOffOutline as NoVideoIcon } from 'react-ionicons';
+import ReactPlayer from 'react-player';
 import {
   Body,
   Container,
@@ -20,14 +21,17 @@ import {
 import theme from '../../ui/theme';
 import { GET_PRODUCT_DETAILS, GET_PRODUCT_VIDEO } from '../../redux/actions/product';
 import Inter from '../../ui/typography/inter';
+// eslint-disable-next-line import/no-cycle
 import { RatingBottle } from '../../atoms';
-import ReactPlayer from 'react-player';
+import productDetailsPanel from './index';
 
 const ProductDetailsPanel = ({
   onClose, isOpen, product, getProductDetails, details,
   getProductVideo, videoProduct
 }) => {
   const [video, setVideo] = useState({});
+  const [hasExternalDetails, setHasExternalDetails] = useState(false);
+
   useEffect(() => {
     if (product) {
       const payload = {
@@ -37,15 +41,19 @@ const ProductDetailsPanel = ({
       getProductDetails(payload);
       getProductVideo(payload);
     }
+    setHasExternalDetails(Boolean(Object.keys(details).length > 0));
   }, [product]);
 
   useEffect(() => {
     if (videoProduct) {
-      const video = videoProduct.find(el => el.site === 'YouTube' && el.type === 'Trailer');
-      setVideo(video);
+      const videoSel = videoProduct.find(el => el.site === 'YouTube' && el.type === 'Trailer');
+      setVideo(videoSel);
     }
   }, [videoProduct]);
 
+  useEffect(() => {
+    setHasExternalDetails(Boolean(Object.keys(details).length > 0));
+  }, [details]);
   return (
     <Container isOpen={isOpen}>
       <CloseIcon
@@ -57,31 +65,38 @@ const ProductDetailsPanel = ({
       />
       <Content>
         <Header>
-          <Cover posterPath={details?.poster_path} />
+          <Cover posterPath={!hasExternalDetails
+            ? product?.posterPath
+            : product?.posterPath || `https://image.tmdb.org/t/p/original/${details?.poster_path}`}
+          />
           <InfoSection>
             <RowInfo>
-              {(details?.release_date || details?.first_air_date) && (
+              {(!hasExternalDetails
+                ? product?.releaseDate
+                : product?.releaseDate || (details?.release_date || details?.first_air_date)) && (
                 <ReleaseDate>
-                  <Inter type="prodDetailsDate">{details?.release_date || details?.first_air_date}</Inter>
+                  <Inter type="prodDetailsDate">{product?.releaseDate || details?.release_date || details?.first_air_date}</Inter>
                 </ReleaseDate>
               )}
               <Genre>
-                <Inter type="prodDetailsGenre">{details?.genres?.map((genre) => (
-                  <span key={genre.name}>{genre.name}</span>
-                ))}
+                <Inter type="prodDetailsGenre">{!hasExternalDetails
+                  ? <span>{product.genre}</span>
+                  : details?.genres?.map((genre) => (
+                    <span key={genre.name}>{genre.name}</span>
+                  ))}
                 </Inter>
               </Genre>
               {product?.productType === 'Film' && (
-                <Inter type="prodDetailsRuntime">{details?.runtime} min.</Inter>
+                <Inter type="prodDetailsRuntime">{!hasExternalDetails ? product.runtime : product.runtime || details?.runtime} min.</Inter>
               )}
             </RowInfo>
-            <Inter type="prodDetailsTitle">{details?.title || details?.name}</Inter>
+            <Inter type="prodDetailsTitle">{!hasExternalDetails ? product.title : product.title || (details?.title || details?.name)}</Inter>
             <RowRating>
               {product?.mVote && <RatingBottle vote={product?.mVote} voter="m" />}
               {product?.iVote && <RatingBottle vote={product?.iVote} voter="i" />}
             </RowRating>
             <Description>
-              <Inter type="h4">{details?.overview}</Inter>
+              <Inter type="prodDetailsSummary">{!hasExternalDetails ? product.summary : product.summary || details?.overview}</Inter>
             </Description>
           </InfoSection>
         </Header>
@@ -89,13 +104,13 @@ const ProductDetailsPanel = ({
           <VideoWrapper>
             <Inter type="medium">
               Video
-              {videoProduct?.length > 0 && (
-                <Inter htmlAttribute="span" type="prodVideoType">{" - "}{video?.type}</Inter>
+              {(!hasExternalDetails || videoProduct?.length > 0) && (
+                <Inter htmlAttribute="span" type="prodVideoType">{" - "}{!hasExternalDetails ? 'Trailer' : video?.type}</Inter>
               )}
             </Inter>
-            {videoProduct?.length > 0 ? (
+            {(!hasExternalDetails || videoProduct?.length > 0) ? (
               <ReactPlayer
-                url={`https://www.youtube.com/watch?v=${video?.key}`}
+                url={`https://www.youtube.com/watch?v=${product?.trailerId || video?.key}`}
                 width="100%"
                 height="100%"
                 controls
@@ -112,16 +127,16 @@ const ProductDetailsPanel = ({
             )}
           </VideoWrapper>
           <DetailsProduct>
-            {(details?.original_name || details?.original_title) && (
+            {(!hasExternalDetails || (details?.original_name || details?.original_title)) && (
               <Detail>
                 <Inter type="bold">Titolo Originale</Inter>
-                <Inter type="cardTitle">{details?.original_name || details?.original_title}</Inter>
+                <Inter type="cardTitle">{product.originalTitle || details?.original_name || details?.original_title}</Inter>
               </Detail>
             )}
-            {details?.original_language && (
+            {(!hasExternalDetails || details?.original_language) && (
               <Detail>
                 <Inter type="bold">Lingua Originale</Inter>
-                <Inter type="cardTitle">{details?.original_language}</Inter>
+                <Inter type="cardTitle">{product.originalLanguage || details?.original_language}</Inter>
               </Detail>
             )}
           </DetailsProduct>
