@@ -87,7 +87,10 @@ const Home = ({
   };
 
   useEffect(() => {
-    setListProducts(productsList);
+    if (productsList.length > 0) {
+      const list = productsList?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      setListProducts(list);
+    }
   }, [productsList]);
 
   useEffect(() => {

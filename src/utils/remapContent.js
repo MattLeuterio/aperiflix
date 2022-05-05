@@ -3,6 +3,7 @@ export const remapContent = (type, obj) => {
   switch (type) {
     case 'movie':
       res = {
+        createdAt: obj.sys.createdAt,
         id: obj.sys.id,
         idTmdb: obj.fields.idTmdb,
         title: obj.fields.title,
