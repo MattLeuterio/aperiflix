@@ -23,7 +23,6 @@ import { GET_PRODUCT_DETAILS, GET_PRODUCT_VIDEO } from '../../redux/actions/prod
 import Inter from '../../ui/typography/inter';
 // eslint-disable-next-line import/no-cycle
 import { RatingBottle } from '../../atoms';
-import productDetailsPanel from './index';
 
 const ProductDetailsPanel = ({
   onClose, isOpen, product, getProductDetails, details,

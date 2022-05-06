@@ -40,13 +40,14 @@ const Home = ({
   filterByTitle, genreSelected, productTypeSelected,
   setFilterByTitle, setGenre, setOrder, productsList,
   orderSelected, filtersOpen, setFiltersPanelClose,
-                resetDetailsPanel
+  resetDetailsPanel
 }) => {
   const [detailsPanelIsOpen, setDetailsPanelIsOpen] = useState(false);
   const [productSelected, setProductSelected] = useState({});
   const [listProducts, setListProducts] = useState([]);
   const [countFilters, setCountFilters] = useState(0);
   const [totalProducts, setTotalProducts] = useState(0);
+  const [listGenres, setListGenres] = useState([]);
   const [listFiltersSelected, setListFiltersSelected] = useState(initialListFiltersSelected);
 
   const switchFilterValue = (name) => {
@@ -89,6 +90,10 @@ const Home = ({
   useEffect(() => {
     if (productsList.length > 0) {
       const list = productsList?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      setListGenres(list.reduce((acc = [], prod) => {
+        if (!acc?.includes(prod.genre)) acc.push(prod.genre);
+        return acc;
+      }, []));
       setListProducts(list);
     }
   }, [productsList]);
@@ -155,6 +160,7 @@ const Home = ({
   const onCloseProductDetailsPanel = () => {
     resetDetailsPanel();
     setDetailsPanelIsOpen(false);
+    setProductSelected({});
   };
 
   return (
